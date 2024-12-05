@@ -1,0 +1,27 @@
+name: "Testeo de la aplicacion"
+
+on:
+    push:
+        branches:
+            - main
+            pull_request:
+                branches:
+                    - realise
+
+jobs:
+    testing:
+    run-on: ubuntu-lastest
+    steps:
+        - name: Checkout code
+        uses: actions/chechout@v3
+        
+        - name: set uo PHP
+            uses: shinvammathur/setup-php@v2
+            with:
+                php-version: "8.3"
+                extensions: mbstring, pdo, bcmath
+                ini.values: post_mac_size-256M, upload_max_filesize=256M
+                coverage: none
+        
+        - name: saludar
+          run: php --version
