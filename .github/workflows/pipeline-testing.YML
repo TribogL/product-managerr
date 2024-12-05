@@ -1,27 +1,28 @@
-name: "Testeo de la aplicacion"
+name : "Testeo de la aplicacion"
 
 on:
     push:
+        branches: 
+            - release
+    pull_request:
         branches:
-            - main
-            pull_request:
-                branches:
-                    - realise
+            - release
 
 jobs:
-    testing:
-    run-on: ubuntu-lastest
-    steps:
-        - name: Checkout code
-        uses: actions/chechout@v3
+    #primer job
+    Testing:
+        runs-on: ubuntu-latest
+        steps:
+            - name: pase el codigo hacia el ubuntu
+              uses: actions/checkout@v3
         
-        - name: set uo PHP
-            uses: shinvammathur/setup-php@v2
-            with:
-                php-version: "8.3"
+            - name: instalo php en mi ambiente
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: '8.3'
                 extensions: mbstring, pdo, bcmath
-                ini.values: post_mac_size-256M, upload_max_filesize=256M
+                ini-values: post_max_size=256M, upload_max_filesize=256M
                 coverage: none
-        
-        - name: saludar
-          run: php --version
+
+            - name: Saludar a los coders
+              run: php -r "echo 'hola a todos, es un placer saludarlos';"
